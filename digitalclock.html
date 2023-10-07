@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s;
+        }
+        #clock {
+            width: 400px;
+            height: 400px;
+            font-size: 4rem; /* Increased font size */
+            color: red; /* Red color */
+            border: 2px dashed #3498db; /* Dashed border */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: borderAnimation 2s infinite alternate;
+        }
+        #toggleButton {
+            margin-top: 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            border: 10px;
+        }
+        #toggleButton:hover {
+            background-color: #2980b9;
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        body.dark-mode #clock {
+            border-color: #e74c3c;
+        }
+        body.dark-mode #toggleButton {
+            background-color: #e74c3c;
+        }
+        body.dark-mode #toggleButton:hover {
+            background-color: #c0392b;
+        }
+        @keyframes borderAnimation {
+            0% {
+                border-color: #3498db;
+            }
+            100% {
+                border-color: #e74c3c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="clock"></div>
+    <button id="toggleButton" onclick="toggleMode()">View Mode</button>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById("clock");
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, "0");
+            const minutes = now.getMinutes().toString().padStart(2, "0");
+            const seconds = now.getSeconds().toString().padStart(2, "0");
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            clockElement.textContent = timeString;
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initialize the clock
+        updateClock();
+    </script>
+</body>
+</html>
